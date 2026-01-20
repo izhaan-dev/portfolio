@@ -1,0 +1,95 @@
+.about-container {
+  min-height: 100vh;
+  padding: 8rem 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.about-content {
+  max-width: 900px;
+  width: 100%;
+  /* Ensure it renders correctly for GSAP */
+  transform: translateZ(0); 
+}
+
+.about-header {
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 4rem;
+}
+
+/* --- FLASHLIGHT CSS --- */
+.flashlight-wrapper {
+  position: relative;
+  min-height: 400px; 
+  cursor: crosshair; 
+}
+
+.layer {
+  font-size: 3rem;
+  line-height: 1.2;
+  font-family: 'Space Grotesk';
+  width: 100%;
+}
+
+.dark-layer {
+  color: #444; /* Slightly brighter for better visibility */
+  position: relative;
+  z-index: 1;
+}
+
+.light-layer {
+  color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  
+  /* Matches the Buffer Zone logic nicely */
+  transition: clip-path 0.1s ease-out; 
+}
+
+.text-block strong {
+  font-weight: 700;
+}
+/* ---------------------- */
+
+.experience-list {
+  margin-top: 5rem;
+  position: relative;
+  z-index: 5;
+}
+
+.experience-list h3 {
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.job {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  font-size: 1.2rem;
+  color: #888;
+  cursor: default;
+  transition: color 0.3s;
+}
+
+.job:hover {
+  color: white;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #222;
+}
+
+@media (max-width: 768px) {
+  .layer {
+    font-size: 2rem;
+  }
+}

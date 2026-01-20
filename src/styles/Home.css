@@ -1,0 +1,276 @@
+/* src/styles/Home.css */
+
+.home-container {
+  padding: 0 3rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* --- 1. HERO SECTION --- */
+.hero {
+  /* Changed from 100vh to 75vh to pull the next section up */
+  min-height: 75vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 100px; /* Added some top padding for balance */
+  padding-bottom: 2rem;
+}
+
+.hero-title {
+  font-size: 8vw;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 2rem; /* Reduced from 3rem */
+  font-weight: 700;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line.gray {
+  color: #444;
+}
+
+/* Mask for animation */
+.mask-container {
+  overflow: hidden;
+  display: block;
+}
+
+/* Bio Styles */
+.hero-bio {
+  max-width: 600px;
+}
+
+.hero-bio p {
+  font-size: 1.2rem;
+  color: #888;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.hero-bio strong {
+  color: white;
+  font-weight: 500;
+}
+
+/* Tech Stack Pills */
+.tech-pills {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.tech-pills span {
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #333;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.tech-pills span:hover {
+  background: white;
+  color: black;
+  border-color: white;
+}
+
+/* --- 2. SPOTLIGHT SERVICES SECTION --- */
+.services-section {
+  position: relative;
+  /* Reduced padding significantly (was 8rem) */
+  padding: 2rem 0; 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  /* Reduced margin significantly (was 8rem) */
+  margin-bottom: 4rem; 
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+}
+
+/* Card Container */
+.service-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02); 
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Content Layer */
+.card-content {
+  position: relative;
+  z-index: 2;
+  padding: 3rem 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y), 
+    rgba(255, 255, 255, 0.04), 
+    transparent 40%
+  );
+}
+
+/* Spotlight Border Effect */
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y), 
+    rgba(255, 255, 255, 0.6), 
+    transparent 40%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 1;
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* Typography & Animation */
+.service-icon {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  opacity: 0.5;
+  transform-origin: left center;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.service-card h3 {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  font-family: 'Space Grotesk';
+}
+
+.service-card h4 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: #fff;
+  transform: translateY(0);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.service-card p {
+  color: #999;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  transition: opacity 0.5s ease;
+}
+
+/* Hover Effects */
+.service-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.service-card:hover .service-icon {
+  opacity: 1;
+  transform: scale(1.2) rotate(5deg);
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+.service-card:hover h4 {
+  transform: translateX(10px);
+}
+
+.service-card:hover p {
+  opacity: 1;
+  color: #ccc;
+}
+
+/* --- 3. WORK SECTION --- */
+.work-section {
+  /* Removed top padding to pull it closer to Services */
+  padding-top: 0; 
+  padding-bottom: 5rem;
+}
+
+.project-card {
+  margin-bottom: 5rem; /* Reduced from 8rem */
+  position: relative;
+  cursor: none;
+  display: block;
+  color: white;
+}
+
+.image-container {
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.project-card:hover .image-container img {
+  transform: scale(1.05);
+}
+
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #333;
+  padding-bottom: 2rem;
+}
+
+.project-info h2 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.project-info p {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 80vh; /* Keep a bit more space on mobile */
+  }
+
+  .services-section {
+    grid-template-columns: 1fr;
+    padding: 2rem 0;
+  }
+  
+  .hero-title {
+    font-size: 12vw;
+  }
+
+  .project-info h2 {
+    font-size: 2rem;
+  }
+}
