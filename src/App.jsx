@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from '@studio-freight/lenis';
 
 import Navbar from './components/Navbar';
