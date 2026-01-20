@@ -36,7 +36,7 @@ const Connect = () => {
       "-=0.5"
     );
     
-    // 6. Reveal Year Text (Updated)
+    // 6. Reveal Year Text
     tl.to(".year-text",
       { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
       "-=0.5"
@@ -64,6 +64,7 @@ const Connect = () => {
 
         {/* INFO GRID */}
         <div className="info-grid">
+          {/* Header Row (Hidden on Mobile) */}
           <div className="grid-row header-row">
             <span>NAME</span>
             <span>EMAIL</span>
@@ -74,28 +75,28 @@ const Connect = () => {
           <div className="grid-row content-row">
             {/* NAME */}
             <div className="grid-item">
-              {/* <div className="star-icon">★</div> */}
+              <span className="mobile-label">NAME</span>
               <h3>Izhaan Tatariya</h3>
               <p>UI/UX & Frontend Engineer</p>
             </div>
 
             {/* EMAIL */}
             <div className="grid-item hover-effect">
-              {/* <div className="icon">✉️</div> */}
+              <span className="mobile-label">EMAIL</span>
               <a href="mailto:izhaan.tatariya@gmail.com" className="contact-link email-small">izhaan.tatariya@gmail.com</a>
               <p className="sub-text">For professional inquiries</p>
             </div>
 
             {/* PHONE */}
             <div className="grid-item hover-effect">
-              {/* <div className="icon">📱</div> */}
+              <span className="mobile-label">PHONE</span>
               <span className="contact-text">+91 8238069884</span>
               <p className="sub-text">WhatsApp available</p>
             </div>
 
             {/* LOCATION */}
             <div className="grid-item hover-effect">
-              {/* <div className="icon">📍</div> */}
+              <span className="mobile-label">LOCATION</span>
               <span className="contact-text">Hyderabad, India</span>
               <p className="sub-text">BITS Pilani Campus</p>
             </div>

@@ -75,6 +75,11 @@
 .grid-item:first-child { padding-left: 0; }
 .grid-item:last-child { border-right: none; }
 
+/* Mobile Label (Hidden on Desktop) */
+.mobile-label {
+  display: none;
+}
+
 /* Hover Effect */
 .grid-item.hover-effect:hover {
   background: rgba(255, 255, 255, 0.05);
@@ -103,11 +108,6 @@
   font-size: 0.9rem;
   color: #666;
   margin-top: auto;
-}
-
-.icon, .star-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
 }
 
 /* --- SOCIALS FOOTER --- */
@@ -192,19 +192,46 @@
 }
 
 @media (max-width: 768px) {
-  .connect-page { padding: 6rem 1.5rem; }
+  .connect-page { 
+    padding: 6rem 1.5rem 2rem; /* Reduced bottom padding */
+  }
   
+  .header-row { display: none; } /* Hide Desktop Headers */
+  
+  /* Stack Content Vertically */
   .grid-row { grid-template-columns: 1fr; } 
   
   .grid-item { 
     border: none; 
     border-bottom: 1px solid rgba(255,255,255,0.1); 
-    padding: 2rem 0; 
+    padding: 2.5rem 0; /* More spacing for touch */
   }
   
+  /* Show Mobile Labels */
+  .mobile-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+  
+  /* Adjust Font Sizes */
+  .grid-item h3, .contact-text, .contact-link {
+    font-size: 1.4rem; /* Larger for mobile readability */
+    margin-top: 0.5rem;
+  }
+
+  .email-small {
+    font-size: 1.1rem; /* Adjust email specifically */
+  }
+  
+  /* Footer Mobile Layout */
   .footer-row { 
     grid-template-columns: 1fr; 
     gap: 3rem; 
+    text-align: left;
   }
   
   .signature-column { 
@@ -212,7 +239,10 @@
     text-align: left; 
   }
   
-  .connect-title { font-size: 15vw; }
+  .connect-title { 
+    font-size: 15vw; 
+    margin-bottom: 2rem;
+  }
   
   .links-stack a { font-size: 1.5rem; }
 
@@ -220,5 +250,6 @@
   .year-text {
     font-size: 5rem;
     margin-top: 1rem;
+    margin-left: -5px; /* Alignment fix */
   }
 }
