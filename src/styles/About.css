@@ -1,95 +1,146 @@
-.about-container {
+/* src/styles/About.css */
+
+.about-page {
+  padding-top: 180px;
   min-height: 100vh;
-  padding: 8rem 3rem;
   display: flex;
   justify-content: center;
-}
-
-.about-content {
-  max-width: 900px;
-  width: 100%;
-  /* Ensure it renders correctly for GSAP */
-  transform: translateZ(0); 
-}
-
-.about-header {
-  font-size: 1rem;
-  text-transform: uppercase;
-  color: #666;
-  margin-bottom: 4rem;
-}
-
-/* --- FLASHLIGHT CSS --- */
-.flashlight-wrapper {
-  position: relative;
-  min-height: 400px; 
-  cursor: crosshair; 
-}
-
-.layer {
-  font-size: 3rem;
-  line-height: 1.2;
-  font-family: 'Space Grotesk';
+  color: white;
   width: 100%;
 }
 
-.dark-layer {
-  color: #444; /* Slightly brighter for better visibility */
+.about-container {
+  max-width: 1000px;
+  padding: 0 2rem 4rem;
   position: relative;
-  z-index: 1;
+  width: 100%;
 }
 
-.light-layer {
-  color: #ffffff;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  pointer-events: none;
-  
-  /* Matches the Buffer Zone logic nicely */
-  transition: clip-path 0.1s ease-out; 
-}
-
-.text-block strong {
+.about-title {
+  font-size: 4rem;
+  margin-bottom: 3rem;
   font-weight: 700;
-}
-/* ---------------------- */
-
-.experience-list {
-  margin-top: 5rem;
-  position: relative;
-  z-index: 5;
-}
-
-.experience-list h3 {
-  margin-bottom: 2rem;
-  font-size: 0.9rem;
-  color: #666;
   text-transform: uppercase;
-}
-
-.job {
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem 0;
-  font-size: 1.2rem;
-  color: #888;
-  cursor: default;
-  transition: color 0.3s;
-}
-
-.job:hover {
   color: white;
 }
 
-hr {
-  border: none;
-  border-top: 1px solid #222;
+/* --- FLASHLIGHT TEXT EFFECT --- */
+.about-text-wrapper {
+  position: relative;
+  margin-bottom: 5rem;
+  
+  /* FIX 1: FORCE HIDE CURSOR IN TEXT AREA */
+  cursor: none !important; 
 }
 
+/* The Base Text (Dim) */
+.about-text-dim {
+  /* FIX 2: MADE BRIGHTER (0.15 -> 0.3) */
+  color: rgba(255, 255, 255, 0.3); 
+  font-size: 2rem;
+  line-height: 1.6;
+  font-weight: 400;
+  cursor: none !important; /* Double check to hide cursor */
+}
+
+/* The Illuminated Text (Lit) */
+.about-text-lit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  font-size: 2rem;
+  line-height: 1.6;
+  font-weight: 400;
+  pointer-events: none;
+  
+  /* FIX 3: SOLID CIRCLE (NON-GRADIENT) */
+  /* "black 100%" creates a hard edge instead of a fade */
+  mask-image: radial-gradient(
+    circle 200px at var(--x, 50%) var(--y, 50%),
+    black 0%,
+    black 100%, 
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle 200px at var(--x, 50%) var(--y, 50%),
+    black 0%,
+    black 100%,
+    transparent 100%
+  );
+}
+
+.about-text-dim p, 
+.about-text-lit p {
+  margin-bottom: 2rem;
+}
+
+/* --- STACK SECTION --- */
+.stack-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+.stack-grid {
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.stack-row {
+  display: flex;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  align-items: center;
+}
+
+.stack-label {
+  width: 200px;
+  color: #888;
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.stack-value {
+  color: white;
+  font-size: 1.1rem;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-  .layer {
-    font-size: 2rem;
+  .about-page {
+    padding-top: 120px;
+  }
+  
+  .about-title {
+    font-size: 3rem;
+  }
+
+  /* Disable Dim Layer on Mobile */
+  .about-text-dim {
+    display: none; 
+  }
+
+  /* Force Lit Layer Visible on Mobile */
+  .about-text-lit {
+    position: relative;
+    color: white !important;
+    opacity: 1 !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    font-size: 1.2rem;
+  }
+
+  .stack-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .stack-label {
+    width: 100%;
+    font-size: 0.8rem;
   }
 }

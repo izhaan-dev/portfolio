@@ -1,80 +1,106 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import '../styles/Project.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HasamTech = () => {
-
   useEffect(() => {
-    // Parallax Effect for the vertical stack
-    gsap.utils.toArray(".parallax-image").forEach((img) => {
+    window.scrollTo(0, 0);
+
+    const tl = gsap.timeline();
+
+    // 1. Reveal Text
+    tl.to(".reveal-text", {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power3.out"
+    });
+
+    // 2. Parallax Image Effect
+    const images = document.querySelectorAll(".v-image-card img");
+    
+    images.forEach((img) => {
       gsap.to(img, {
-        yPercent: -20,
+        yPercent: 20, // Moves the image down slightly as we scroll
         ease: "none",
         scrollTrigger: {
-          trigger: img,
-          start: "top bottom",
-          scrub: true
+          trigger: img.parentElement,
+          start: "top bottom", // Start when card enters viewport
+          end: "bottom top",   // End when card leaves viewport
+          scrub: true,         // Links animation to scroll speed
         }
       });
     });
+
   }, []);
 
   return (
     <div className="project-page">
-      
-      {/* UPDATED HEADER (Data Grid Style) */}
-      <header className="project-header">
-        <h1>HasamTech</h1>
+      <div className="project-container">
         
-        <div className="project-grid">
-          <div className="grid-item">
-            <span className="label">Role</span>
-            <span className="value">Full Stack Dev</span>
+        {/* HEADER */}
+        <header className="project-header">
+          <h1 className="project-title reveal-text">Hasam<br/>Tech</h1>
+          <div className="project-meta reveal-text">
+            <span>2026</span>
+            <span>Consultancy</span>
           </div>
-          <div className="grid-item">
-            <span className="label">Timeline</span>
-            <span className="value">8 Weeks</span>
-          </div>
-          <div className="grid-item">
-            <span className="label">Stack</span>
-            <span className="value">Python, React, SQL</span>
-          </div>
-          <div className="grid-item">
-            <span className="label">Year</span>
-            <span className="value">2024</span>
-          </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Project Description */}
-      <section className="content-block" style={{padding: '0 3rem 5rem'}}>
-        <p style={{fontSize: '2rem', maxWidth: '800px', lineHeight: '1.4'}}>
-          HasamTech required a robust solution for managing complex data flows. 
-          I utilized Python for backend processing and React for a reactive, fast frontend.
-        </p>
-      </section>
+        {/* DETAILS */}
+        <section className="project-details-grid">
+          <div className="detail-column reveal-text">
+            <h3>The Firm</h3>
+            <p>
+              HasamTech is a professional consultancy firm providing strategic business solutions. 
+              I developed a clean, corporate platform that handles data-heavy client requests efficiently while maintaining a fast user interface.
+            </p>
+          </div>
+          <div className="detail-column reveal-text">
+            <h3>Tech Stack</h3>
+            <ul className="tech-list">
+              <li>React.js</li>
+              <li>Python</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+        </section>
 
-      {/* Vertical Parallax Stack */}
-      <div className="gallery-stack" style={{display: 'flex', flexDirection: 'column', gap: '5rem', padding: '0 3rem'}}>
-        <div className="stack-item" style={{overflow: 'hidden', borderRadius: '12px', height: '80vh'}}>
-          <img className="parallax-image" style={{width: '100%', height: '120%', objectFit: 'cover'}} src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2670&auto=format&fit=crop" alt="Code" />
-        </div>
-        <div className="stack-item" style={{overflow: 'hidden', borderRadius: '12px', height: '80vh'}}>
-          <img className="parallax-image" style={{width: '100%', height: '120%', objectFit: 'cover'}} src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2670&auto=format&fit=crop" alt="Laptop" />
-        </div>
+        {/* VERTICAL PARALLAX GALLERY */}
+        <section className="project-gallery-section">
+          <div className="gallery-title">System Architecture</div>
+          
+          <div className="vertical-gallery">
+            {/* Image 1 */}
+            <div className="v-image-card">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" alt="Dashboard Analytics" />
+            </div>
+
+            {/* Image 2 */}
+            <div className="v-image-card">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop" alt="Data Visualization" />
+            </div>
+            
+             {/* Image 3 */}
+             <div className="v-image-card">
+              <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2670&auto=format&fit=crop" alt="Code Structure" />
+            </div>
+          </div>
+        </section>
+
       </div>
 
-      {/* Next Project Link */}
-      <section className="next-project">
-        <h3>Next Project</h3>
-        <Link to="/work/skeye">
-          Skeye Accessories &rarr;
-        </Link>
-      </section>
+      {/* NEXT PROJECT LINK */}
+      <Link to="/work/skeye" className="next-project-link">
+        <span className="next-label">Next Project</span>
+        <span className="next-title">Skeye Accessories</span>
+      </Link>
+
     </div>
   );
 };

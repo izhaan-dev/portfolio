@@ -1,0 +1,224 @@
+/* src/styles/Connect.css */
+
+.connect-page {
+  min-height: 100vh;
+  padding: 8rem 3rem 4rem;
+  color: white;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.connect-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- BIG HEADER --- */
+.connect-title {
+  font-size: 12vw;
+  line-height: 0.9;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+/* --- GRID LAYOUT --- */
+.info-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  transform-origin: center;
+  
+  /* PREVENT POP-IN */
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.header-row {
+  padding: 1.5rem 0;
+  font-size: 0.8rem;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.content-row {
+  padding: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem 1rem 3rem 2rem;
+  transition: background 0.4s ease;
+  
+  /* PREVENT POP-IN */
+  border-right-color: transparent; 
+}
+
+/* Hide content inside grid items */
+.grid-item > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.grid-item:first-child { padding-left: 0; }
+.grid-item:last-child { border-right: none; }
+
+/* Hover Effect */
+.grid-item.hover-effect:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.grid-item h3, .contact-text, .contact-link {
+  font-size: 1.2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  color: white;
+  margin-top: 1rem;
+  display: block;
+}
+
+/* Email fitting */
+.email-small {
+  font-size: 1rem;
+  word-break: break-all;
+}
+
+.contact-link:hover { 
+  text-decoration: underline; 
+  text-decoration-thickness: 2px; 
+}
+
+.sub-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: auto;
+}
+
+.icon, .star-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* --- SOCIALS FOOTER --- */
+.socials-footer {
+  margin-top: 4rem;
+}
+
+.footer-row {
+  grid-template-columns: 1fr 1fr;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  
+  /* PREVENT POP-IN */
+  opacity: 0; 
+  transform: scaleX(0);
+}
+
+.social-column, .signature-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.links-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* PREVENT POP-IN */
+.links-stack a {
+  font-size: 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.3s ease;
+  display: inline-block;
+  color: #888;
+  
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.links-stack a:hover { 
+  color: #fff;
+  transform: translateX(10px) !important;
+}
+
+.signature-column {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* --- NEW SLEEK YEAR TEXT --- */
+.year-text {
+  font-size: 8rem;
+  font-weight: 700;
+  /* Sleek Grey Color */
+  color: rgba(255, 255, 255, 0.1); 
+  line-height: 1;
+  margin-top: 2rem;
+  
+  /* Animation Start State */
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 1024px) {
+  .grid-row { grid-template-columns: 1fr 1fr; }
+  .grid-item { 
+    border-right: none; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+  }
+  .grid-item:nth-child(even) { 
+    border-left: 1px solid rgba(255,255,255,0.1); 
+  }
+}
+
+@media (max-width: 768px) {
+  .connect-page { padding: 6rem 1.5rem; }
+  
+  .grid-row { grid-template-columns: 1fr; } 
+  
+  .grid-item { 
+    border: none; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    padding: 2rem 0; 
+  }
+  
+  .footer-row { 
+    grid-template-columns: 1fr; 
+    gap: 3rem; 
+  }
+  
+  .signature-column { 
+    align-items: flex-start; 
+    text-align: left; 
+  }
+  
+  .connect-title { font-size: 15vw; }
+  
+  .links-stack a { font-size: 1.5rem; }
+
+  /* Mobile Year Text */
+  .year-text {
+    font-size: 5rem;
+    margin-top: 1rem;
+  }
+}

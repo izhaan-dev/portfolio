@@ -9,21 +9,49 @@ gsap.registerPlugin(ScrollTrigger);
 const Home = () => {
   const servicesRef = useRef(null);
 
-  // --- MOUSE TRACKING FOR SPOTLIGHT EFFECT ---
-  const handleMouseMove = (e) => {
-    if (!servicesRef.current) return;
-    
-    const rect = servicesRef.current.getBoundingClientRect();
+  // 1. Move Light to Cursor Position (Instant)
+  const handleCardMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Set CSS variables for the spotlight position
-    servicesRef.current.style.setProperty('--mouse-x', `${x}px`);
-    servicesRef.current.style.setProperty('--mouse-y', `${y}px`);
+    // Kill any ongoing "return" animations so the mouse takes over instantly
+    gsap.killTweensOf(card);
+
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
+  // 2. Return Light to Center (Smooth)
+  const handleCardMouseLeave = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    
+    // Calculate Center
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // Animate CSS variables back to center
+    gsap.to(card, {
+      "--mouse-x": `${centerX}px`,
+      "--mouse-y": `${centerY}px`,
+      duration: 0.6,
+      ease: "power3.out"
+    });
   };
 
   useEffect(() => {
-    // 1. Hero Text Animation
+    // --- INITIALIZATION ---
+    // Set the initial light position to the center for all cards
+    const cards = document.querySelectorAll('.service-card');
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mouse-x', `${rect.width / 2}px`);
+      card.style.setProperty('--mouse-y', `${rect.height / 2}px`);
+    });
+
+    // --- ANIMATIONS ---
     const tl = gsap.timeline();
     tl.fromTo(".hero-line span", 
       { y: 100, opacity: 0 },
@@ -35,7 +63,6 @@ const Home = () => {
       "-=0.5"
     );
 
-    // 2. Project Card Scroll Animation
     gsap.utils.toArray(".project-card").forEach((card) => {
       gsap.fromTo(card, 
         { y: 100, opacity: 0 },
@@ -67,13 +94,14 @@ const Home = () => {
       </section>
 
       {/* --- SPOTLIGHT SERVICES SECTION --- */}
-      <section 
-        className="services-section" 
-        ref={servicesRef} 
-        onMouseMove={handleMouseMove}
-      >
+      <section className="services-section" ref={servicesRef}>
+        
         {/* Card 01 */}
-        <div className="service-card">
+        <div 
+          className="service-card" 
+          onMouseMove={handleCardMouseMove}
+          onMouseLeave={handleCardMouseLeave} 
+        >
           <div className="card-content">
             <div className="service-icon">✦</div>
             <h3>01</h3>
@@ -83,7 +111,11 @@ const Home = () => {
         </div>
 
         {/* Card 02 */}
-        <div className="service-card">
+        <div 
+          className="service-card" 
+          onMouseMove={handleCardMouseMove}
+          onMouseLeave={handleCardMouseLeave}
+        >
           <div className="card-content">
             <div className="service-icon">⚡</div>
             <h3>02</h3>
@@ -93,7 +125,11 @@ const Home = () => {
         </div>
 
         {/* Card 03 */}
-        <div className="service-card">
+        <div 
+          className="service-card" 
+          onMouseMove={handleCardMouseMove}
+          onMouseLeave={handleCardMouseLeave}
+        >
           <div className="card-content">
             <div className="service-icon">◎</div>
             <h3>03</h3>
@@ -108,8 +144,7 @@ const Home = () => {
         <Link to="/work/skeye">
           <div className="project-card">
             <div className="image-container">
-              {/* Replace with your local image if you have one, or keep this stock photo */}
-              <img src="/Bracelet1.jpg" alt="Skeye Accessories" />
+              <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=2070&auto=format&fit=crop" alt="Skeye Accessories" />
             </div>
             <div className="project-info">
               <h2>Skeye Accessories</h2>

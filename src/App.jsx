@@ -9,6 +9,8 @@ import About from './pages/About';
 import Skeye from './pages/Skeye';
 import HasamTech from './pages/HasamTech';
 import Background from './components/Background';
+import Connect from './pages/Connect'; 
+import ConnectButton from './components/ConnectButton';
 
 // --- SCROLL HANDLER COMPONENT ---
 // This component has access to the lenis instance via props or global scope if needed,
@@ -64,12 +66,14 @@ function App() {
         
         {/* BACKGROUND LAYER (Fixed at Z-Index -1) */}
         <Background />
+        <ConnectButton />
 
         {/* CONTENT LAYER (Relative at Z-Index 1) */}
         <div style={{ position: 'relative', zIndex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/connect" element={<Connect />} />
             <Route path="/work/skeye" element={<Skeye />} />
             <Route path="/work/hasamtech" element={<HasamTech />} />
           </Routes>
