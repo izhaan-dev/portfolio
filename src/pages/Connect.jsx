@@ -74,28 +74,28 @@ const Connect = () => {
           <div className="grid-row content-row">
             {/* NAME */}
             <div className="grid-item">
-              <div className="star-icon">★</div>
+              {/* <div className="star-icon">★</div> */}
               <h3>Izhaan Tatariya</h3>
               <p>UI/UX & Frontend Engineer</p>
             </div>
 
             {/* EMAIL */}
             <div className="grid-item hover-effect">
-              <div className="icon">✉️</div>
+              {/* <div className="icon">✉️</div> */}
               <a href="mailto:izhaan.tatariya@gmail.com" className="contact-link email-small">izhaan.tatariya@gmail.com</a>
               <p className="sub-text">For professional inquiries</p>
             </div>
 
             {/* PHONE */}
             <div className="grid-item hover-effect">
-              <div className="icon">📱</div>
+              {/* <div className="icon">📱</div> */}
               <span className="contact-text">+91 8238069884</span>
               <p className="sub-text">WhatsApp available</p>
             </div>
 
             {/* LOCATION */}
             <div className="grid-item hover-effect">
-              <div className="icon">📍</div>
+              {/* <div className="icon">📍</div> */}
               <span className="contact-text">Hyderabad, India</span>
               <p className="sub-text">BITS Pilani Campus</p>
             </div>
