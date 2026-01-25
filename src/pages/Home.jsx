@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import '../styles/Home.css';
+import WorkFolder from '../components/WorkFolder';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,9 +17,7 @@ const Home = () => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Kill any ongoing "return" animations so the mouse takes over instantly
     gsap.killTweensOf(card);
-
     card.style.setProperty('--mouse-x', `${x}px`);
     card.style.setProperty('--mouse-y', `${y}px`);
   };
@@ -27,12 +26,9 @@ const Home = () => {
   const handleCardMouseLeave = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
-    
-    // Calculate Center
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    // Animate CSS variables back to center
     gsap.to(card, {
       "--mouse-x": `${centerX}px`,
       "--mouse-y": `${centerY}px`,
@@ -42,8 +38,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // --- INITIALIZATION ---
-    // Set the initial light position to the center for all cards
+    // Initial light setup
     const cards = document.querySelectorAll('.service-card');
     cards.forEach(card => {
       const rect = card.getBoundingClientRect();
@@ -51,7 +46,7 @@ const Home = () => {
       card.style.setProperty('--mouse-y', `${rect.height / 2}px`);
     });
 
-    // --- ANIMATIONS ---
+    // --- 1. HERO ANIMATION ---
     const tl = gsap.timeline();
     tl.fromTo(".hero-line span", 
       { y: 100, opacity: 0 },
@@ -63,15 +58,40 @@ const Home = () => {
       "-=0.5"
     );
 
-    gsap.utils.toArray(".project-card").forEach((card) => {
-      gsap.fromTo(card, 
-        { y: 100, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 1, ease: "power3.out",
-          scrollTrigger: { trigger: card, start: "top 85%" }
+    // --- 2. SERVICES ANIMATION (Updated) ---
+    gsap.fromTo(".service-card", 
+      { y: 100, opacity: 0 },
+      {
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        // REMOVED stagger: 0.2 -> Cards now load together
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".services-section",
+          start: "top 80%",
+          toggleActions: "play none none reverse"
         }
-      );
-    });
+      }
+    );
+
+    // --- 3. WORK FOLDER ANIMATION ---
+    gsap.fromTo(".work-section > *",
+      { y: 60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".work-section",
+          start: "top 75%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
   }, []);
 
   return (
@@ -93,9 +113,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- SPOTLIGHT SERVICES SECTION --- */}
+      {/* --- SERVICES SECTION --- */}
       <section className="services-section" ref={servicesRef}>
-        
         {/* Card 01 */}
         <div 
           className="service-card" 
@@ -139,31 +158,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* --- WORK SECTION --- */}
+      {/* --- WORK FOLDER SECTION --- */}
       <section className="work-section">
-        <Link to="/work/skeye">
-          <div className="project-card">
-            <div className="image-container">
-              <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=2070&auto=format&fit=crop" alt="Skeye Accessories" />
-            </div>
-            <div className="project-info">
-              <h2>Skeye Accessories</h2>
-              <p>E-Commerce Design</p>
-            </div>
-          </div>
-        </Link>
-        
-        <Link to="/work/hasamtech">
-          <div className="project-card">
-            <div className="image-container">
-              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop" alt="HasamTech" />
-            </div>
-            <div className="project-info">
-              <h2>HasamTech</h2>
-              <p>Web Development</p>
-            </div>
-          </div>
-        </Link>
+        <h2 className="section-header">Selected Works</h2>
+        <WorkFolder />
       </section>
 
     </div>
