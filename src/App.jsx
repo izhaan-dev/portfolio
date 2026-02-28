@@ -8,15 +8,11 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Skeye from './pages/Skeye';
 import HasamTech from './pages/HasamTech';
+import IZZIBS from './pages/IZZIBS';
 import Background from './components/Background';
 import Connect from './pages/Connect'; 
 import ConnectButton from './components/ConnectButton';
 
-// --- BORED PAGES ---
-import Bored from './pages/Bored';
-import TheVoid from './pages/bored/TheVoid';
-import TheBox from './pages/bored/TheBox';
-import TheEcho from './pages/bored/TheEcho';
 
 const ScrollHandler = ({ lenisRef }) => {
   const { pathname } = useLocation();
@@ -62,12 +58,8 @@ function App() {
             <Route path="/connect" element={<Connect />} />
             <Route path="/work/skeye" element={<Skeye />} />
             <Route path="/work/hasamtech" element={<HasamTech />} />
-            
-            {/* --- BORED ROUTES --- */}
-            <Route path="/bored" element={<Bored />} />
-            <Route path="/bored/void" element={<TheVoid />} />
-            <Route path="/bored/box" element={<TheBox />} />
-            <Route path="/bored/echo" element={<TheEcho />} />
+            <Route path="/work/izzibs" element={<IZZIBS />} />
+          
           </Routes>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import '../styles/Project.css';
+import { getAssetPath } from '../utils/getAssetPath';
 
 const Skeye = () => {
   const galleryRef = useRef(null);
@@ -10,17 +11,10 @@ const Skeye = () => {
 
   // --- NEW RELIABLE IMAGE LINKS ---
   const images = [
-    // 1. Gold Ring Stack
-    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=2070&auto=format&fit=crop", 
-    
-    // 2. Minimalist Necklace Model
-    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=2070&auto=format&fit=crop", 
-    
-    // 3. NEW REPLACEMENT (Pexels Link - High Reliability): Silver/Diamond Ring
-    "https://images.pexels.com/photos/5442449/pexels-photo-5442449.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    
-    // 4. Clean Jewelry Box / Packaging
-    "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop"
+    getAssetPath('/Skeye/skeye1.png'),
+    getAssetPath('/Skeye/skeye2.png'),
+    getAssetPath('/Skeye/skeye3.png'),
+    getAssetPath('/Skeye/skeye4.png')
   ];
 
   // Auto-Rotate Logic
@@ -110,9 +104,9 @@ const Skeye = () => {
       </section>
 
       {/* NEXT PROJECT LINK */}
-      <Link to="/work/hasamtech" className="next-project-link">
+      <Link to="/work/izzibs" className="next-project-link">
         <span className="next-label">Next Project</span>
-        <span className="next-title">HasamTech</span>
+        <span className="next-title">IZZIBS Website</span>
       </Link>
 
     </div>

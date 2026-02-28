@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import '../styles/Project.css';
+import { getAssetPath } from '../utils/getAssetPath';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,6 +60,8 @@ const HasamTech = () => {
             <p>
               HasamTech is a professional consultancy firm providing strategic business solutions. 
               I developed a clean, corporate platform that handles data-heavy client requests efficiently while maintaining a fast user interface.
+              <br/>
+              <a href="https://hasamtech.com" target="_blank" rel="noopener noreferrer" style={{color: '#0077cc', textDecoration: 'underline'}}>View Project</a>
             </p>
           </div>
           <div className="detail-column reveal-text">
@@ -74,21 +77,16 @@ const HasamTech = () => {
         {/* VERTICAL PARALLAX GALLERY */}
         <section className="project-gallery-section">
           <div className="gallery-title">System Architecture</div>
-          
           <div className="vertical-gallery">
-            {/* Image 1 */}
+            {/* Placeholder Images */}
             <div className="v-image-card">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" alt="Dashboard Analytics" />
+              <img src={getAssetPath('/Hasamtech/hasamtech1.png')} alt="Dashboard Analytics" />
             </div>
-
-            {/* Image 2 */}
             <div className="v-image-card">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop" alt="Data Visualization" />
+              <img src={getAssetPath('/Hasamtech/hasamtech2.png')} alt="Data Visualization" />
             </div>
-            
-             {/* Image 3 */}
-             <div className="v-image-card">
-              <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2670&auto=format&fit=crop" alt="Code Structure" />
+            <div className="v-image-card">
+              <img src={getAssetPath('/Hasamtech/hasamtech3.png')} alt="Code Structure" />
             </div>
           </div>
         </section>

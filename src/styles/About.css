@@ -28,9 +28,8 @@
 .about-text-wrapper {
   position: relative;
   margin-bottom: 5rem;
-  
-  /* FIX 1: FORCE HIDE CURSOR IN TEXT AREA */
-  cursor: none !important; 
+  min-height: 320px;
+  cursor: none !important;
 }
 
 /* The Base Text (Dim) */
@@ -55,9 +54,7 @@
   line-height: 1.6;
   font-weight: 400;
   pointer-events: none;
-  
-  /* FIX 3: SOLID CIRCLE (NON-GRADIENT) */
-  /* "black 100%" creates a hard edge instead of a fade */
+  background: transparent;
   mask-image: radial-gradient(
     circle 200px at var(--x, 50%) var(--y, 50%),
     black 0%,

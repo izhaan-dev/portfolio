@@ -2,21 +2,29 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import '../styles/WorkFolder.css';
+import { getAssetPath } from '../utils/getAssetPath';
 
 const projects = [
   {
     id: 1,
     title: "Skeye Accessories",
     category: "E-Commerce",
-    img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=2070&auto=format&fit=crop",
+    img: getAssetPath('/Skeye/skeye logo.png'),
     link: "/work/skeye",
   },
   {
     id: 2,
     title: "HasamTech",
     category: "Corporate Web",
-    img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
+    img: getAssetPath('/Hasamtech/hasamtech logo.png'),
     link: "/work/hasamtech",
+  },
+  {
+    id: 3,
+    title: "IZZIBS Website",
+    category: "Consulting Web",
+    img: getAssetPath('/Izzibs/Izzi logo.jpg'),
+    link: "/work/izzibs",
   }
 ];
 
@@ -24,8 +32,8 @@ const WorkFolder = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="folder-wrapper">
-      
+    <div className="folder-wrapper" style={{ position: 'relative' }}>
+
       {/* GLOW EFFECT */}
       <div className="folder-glow"></div>
 
@@ -45,39 +53,40 @@ const WorkFolder = () => {
         {/* PROJECT CARDS */}
         <div className="cards-stack">
           {projects.map((project, index) => {
-            const offset = (index - (projects.length - 1) / 2) * 360; 
-            
+            // Adjusted offsets for more visible cards in closed view
+            const baseOffset = 60; // space between cards
+            const offset = (index - (projects.length - 1) / 2) * baseOffset;
             return (
               <motion.div
                 key={project.id}
                 className="folder-card"
                 variants={{
-                  closed: { 
-                    x: index * 5, 
-                    y: 0, 
-                    rotate: index % 2 === 0 ? -2 : 2,
-                    scale: 0.95 + (index * 0.02),
+                  closed: {
+                    x: offset,
+                    y: Math.abs(index - 1) * 18, // slight vertical offset for outer cards
+                    scale: 0.92 + (index * 0.04),
+                    rotate: (index - 1) * 6,
                     zIndex: index
                   },
                   hover: {
                     y: -35,
-                    rotate: index % 2 === 0 ? -4 : 4,
+                    rotate: (index - 1) * 10,
                     transition: { type: "spring", stiffness: 300 }
                   },
-                  open: { 
-                    x: offset,
-                    y: -150, 
+                  open: {
+                    x: (index - 1) * 340,
+                    y: -150,
+                    scale: 1,
                     rotate: 0,
-                    scale: 1, 
                     zIndex: 10 + index,
                     transition: { type: "spring", stiffness: 180, damping: 15 }
                   }
                 }}
               >
-                <Link 
-                  to={project.link} 
+                <Link
+                  to={project.link}
                   className="card-link"
-                  onClick={(e) => e.stopPropagation()} 
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <div className="card-image">
                     <img src={project.img} alt={project.title} />
@@ -125,9 +134,9 @@ const WorkFolder = () => {
       
       <motion.p 
         className="instruction-text"
-        animate={{ opacity: isOpen ? 0 : 0.4, y: isOpen ? 20 : 0 }}
+        animate={{ opacity: isOpen ? 0 : 0.7, y: isOpen ? 20 : 0 }}
       >
-        Click to initialize
+        Click to Open
       </motion.p>
     </div>
   );

@@ -1,21 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../styles/About.css';
 
 const About = () => {
+  // Use refs to track the wrapper element and the last known mouse position
+  const wrapperRef = useRef(null);
+  const mousePos = useRef({ x: 0, y: 0 });
+
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      const wrapper = document.querySelector('.about-text-wrapper');
-      if (wrapper) {
-        const rect = wrapper.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        wrapper.style.setProperty('--x', `${x}px`);
-        wrapper.style.setProperty('--y', `${y}px`);
+    // Helper function to calculate and set the CSS variables
+    const updateFlashlight = () => {
+      if (wrapperRef.current) {
+        const rect = wrapperRef.current.getBoundingClientRect();
+        const x = mousePos.current.x - rect.left;
+        const y = mousePos.current.y - rect.top;
+        wrapperRef.current.style.setProperty('--x', `${x}px`);
+        wrapperRef.current.style.setProperty('--y', `${y}px`);
       }
     };
 
+    const handleMouseMove = (e) => {
+      // 1. Update the stored mouse position
+      mousePos.current = { x: e.clientX, y: e.clientY };
+      // 2. Update the flashlight
+      updateFlashlight();
+    };
+
+    const handleScroll = () => {
+      // When scrolling, recalculate using the last known mouse position
+      updateFlashlight();
+    };
+
+    // Listen to both mouse movement and scrolling
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   // The text content used in both layers
@@ -38,8 +60,8 @@ const About = () => {
         {/* Title */}
         <h1 className="about-title">About Me</h1>
         
-        {/* Flashlight Text Wrapper */}
-        <div className="about-text-wrapper">
+        {/* Flashlight Text Wrapper - Attached the ref here! */}
+        <div className="about-text-wrapper" ref={wrapperRef}>
           {/* Layer 1: Dim Text (Always visible but dark) */}
           <div className="about-text-dim">
             {content}

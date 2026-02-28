@@ -96,7 +96,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      
       {/* --- HERO SECTION --- */}
       <section className="hero">
         <h1 className="hero-title">
@@ -159,11 +158,21 @@ const Home = () => {
       </section>
 
       {/* --- WORK FOLDER SECTION --- */}
-      <section className="work-section">
-        <h2 className="section-header">Selected Works</h2>
-        <WorkFolder />
+      <section className="work-section" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+        {/* 10 random shapes for WorkFolder background */}
+        <svg className="wf-bg-shapes" width="100%" height="100%" viewBox="0 0 1920 1400" style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
+          <circle cx="00" cy="400" r="220" fill="#fff" opacity="0.07" />
+          <rect x="1500" y="200" width="420" height="320" fill="#fff" opacity="0.06" rx="64" />
+          <polygon points="100,1100 1200,1580 300,1580" fill="#fff" opacity="0.09" />
+          <circle cx="1700" cy="900" r="120" fill="#fff" opacity="0.07" />
+          <rect x="00" y="700" width="240" height="240" fill="#fff" opacity="0.05" rx="48" />
+          <polygon points="1600,1200 1800,1600 1400,1600" fill="#fff" opacity="0.08" />
+        </svg>
+        <h2 className="section-header" style={{ position: 'relative', zIndex: 1 }}>Selected Works</h2>
+        <div style={{ position: 'relative', zIndex: 1, marginTop: '5rem' }}>
+          <WorkFolder />
+        </div>
       </section>
-
     </div>
   );
 };
